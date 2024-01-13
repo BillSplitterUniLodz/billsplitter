@@ -1,12 +1,11 @@
 require 'dynamoid'
-
 Aws.config.update(
-  region: 'us-west-2',
-  credentials: Aws::Credentials.new('local', 'local'),
+  region:  ENV['AWS_REGION'],
+  credentials: Aws::Credentials.new(ENV["AWS_ACCESS_KEY_ID"], ENV["AWS_SECRET_ACCESS_KEY"]),
 )
 Dynamoid.configure do |config|
-  config.endpoint = "http://localhost:8000"
-  config.access_key = 'local'
-  config.secret_key = 'local'
-  config.region = 'us-west-2'
+  config.endpoint = ENV["DYNAMO_ENDPOINT"]
+  config.access_key = ENV["AWS_ACCESS_KEY_ID"]
+  config.secret_key = ENV["AWS_SECRET_ACCESS_KEY"]
+  config.region = ENV['AWS_REGION']
 end

@@ -1,12 +1,13 @@
 class GroupsController < ApplicationController
   def index
-    render json: Group.where(participant_uuid: current_user.user_uuid).all
+    render json: Group.find(participant_uuid: current_user.user_uuid) 
   end
 
   def create
     Group.create(
       group_uuid: SecureRandom.uuid,
-      participant: current_user.user_uuid
+      participant_uuid: current_user.user_uuid, 
+      name: params[:name]
     )
   end
 end
