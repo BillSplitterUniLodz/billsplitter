@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::API
   before_action :validate_user!
 
@@ -12,16 +14,14 @@ class ApplicationController < ActionController::API
   end
 
   def render_access_denied
-    render json: { message: 'Access denied' }, status: 403
+    render json: { message: 'Access denied' }, status: :forbidden
   end
 
   def validate_user!
-    @current_user = request.env["warden"].authenticate!(scope: :user)
+    @current_user = request.env['warden'].authenticate!(scope: :user)
   end
 
-  private 
-  
-  def current_user
-    @current_user
-  end
+  private
+
+  attr_reader :current_user
 end

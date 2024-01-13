@@ -1,7 +1,11 @@
-require "test_helper"
+# frozen_string_literal: true
 
-class Users::RegistrationControllerTest < ActionDispatch::IntegrationTest
-  # test "the truth" do
-  #   assert true
-  # end
+require 'test_helper'
+
+module Users
+  class RegistrationControllerTest < ActionDispatch::IntegrationTest
+    # test "the truth" do
+    #   assert true
+    # end
+  end
 end
