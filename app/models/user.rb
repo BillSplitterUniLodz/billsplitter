@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'bcrypt'
 class User
   include Dynamoid::Document
@@ -24,10 +26,10 @@ class User
   end
 
   def encrypt_password
-    if password.present?
-      self.encrypted_password = BCrypt::Password.create(password)
-      self.password = nil # Clear the plain text password after encryption
-    end
+    return if password.blank?
+
+    self.encrypted_password = BCrypt::Password.create(password)
+    self.password = nil # Clear the plain text password after encryption
   end
 
   def authenticate(plain_text_password)
@@ -38,7 +40,7 @@ class User
     attributes.except(:encrypted_password)
   end
 
-  def to_json
+  def to_json(*_args)
     to_h.to_json
   end
 end
