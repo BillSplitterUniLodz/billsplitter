@@ -2,13 +2,19 @@ version: '3.8'
 
 services:
   app:
-    build: .
+    build: 
+      dockerfile: Dockerfile.development
     ports:
       - "3000:3000"
     depends_on:
       - dynamodb
     volumes:
       - .:/rails
+    environment:
+      - DYNAMO_ENDPOINT="http://dynamodb:8000"
+      - AWS_REGION="us-west-2"
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
   dynamodb:
     image: amazon/dynamodb-local:latest
     ports:
@@ -19,9 +25,9 @@ services:
     ports:
       - "8001:8001"
     environment:
-      DYNAMO_ENDPOINT: "http://dynamodb:8000"
-      AWS_REGION: "us-west-2"
-      AWS_ACCESS_KEY_ID: local
-      AWS_SECRET_ACCESS_KEY: local
+      - DYNAMO_ENDPOINT=http://dynamodb:8000
+      - AWS_REGION=us-west-2
+      - AWS_ACCESS_KEY_ID=local
+      - AWS_SECRET_ACCESS_KEY=local
     depends_on:
       - dynamodb
