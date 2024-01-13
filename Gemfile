@@ -7,7 +7,7 @@ gem 'dotenv'
 gem "rails", "~> 7.1.2"
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem "puma", ">= 6.4.2"
 
 gem 'dynamoid'
 
