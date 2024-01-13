@@ -2,6 +2,7 @@ source "https://rubygems.org"
 
 ruby "3.2.1"
 
+gem 'dotenv'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.1.2"
 
@@ -12,7 +13,6 @@ gem 'dynamoid'
 
 gem 'warden-jwt_auth'
 
-gem 'dotenv'
 
 gem 'bcrypt'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
