@@ -1,0 +1,19 @@
+services:
+  app:
+    image: 'billsplitter/dev'
+    depends_on:
+      - dynamodb
+    build:
+      context: .
+      dockerfile: "Dockerfile.dev"
+    volumes:
+      - .:/app:rw
+      - ./dynamodb-data:/dynamodb/data
+    ports:
+      - "3000:3000"
+  dynamodb:
+    image: amazon/dynamodb-local
+    volumes:
+      - ./dynamodb-data:/dynamodb
+    ports:
+      - "8000:8000"
