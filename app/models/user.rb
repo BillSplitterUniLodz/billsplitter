@@ -41,9 +41,4 @@ class User
   def to_json
     to_h.to_json
   end
-
-
-  def self.authorize!(sub)
-    binding.pry
-  end
 end
