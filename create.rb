@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 user = User.create(
   username: 'admin1',
   password: 'password',
@@ -23,11 +25,3 @@ group1 = Group.create(
   participant_uuid: user1.user_uuid
 )
 
-# Add to group
-# group = Group.find(uuid: group_uuid)
-# new_group = group.clone
-# new_group.participant_uuid = params[:new_user]
-
-expense = Expense.create(
-
-)

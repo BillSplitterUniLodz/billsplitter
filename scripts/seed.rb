@@ -1,4 +1,5 @@
 #!/usr/bin/env ruby
+# frozen_string_literal: true
 
 User.create(
   user_uuid: SecureRandom.uuid,

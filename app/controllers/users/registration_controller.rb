@@ -1,15 +1,19 @@
-class Users::RegistrationController < ApplicationController
-  skip_before_action :validate_user!
+# frozen_string_literal: true
 
-  def sign_up
-    user = User.create(signup_params.merge(uuid: SecureRandom.uuid))
-    warden.set_user(user, scope: :user)
-    render json: user.to_h.merge(jwt_token:  generate_token(user, :user))
-  end
+module Users
+  class RegistrationController < ApplicationController
+    skip_before_action :validate_user!
 
-  private
+    def sign_up
+      user = User.create(signup_params.merge(uuid: SecureRandom.uuid))
+      warden.set_user(user, scope: :user)
+      render json: user.to_h.merge(jwt_token: generate_token(user, :user))
+    end
 
-  def signup_params
-    params.require(:user).permit(:username, :email, :password)
+    private
+
+    def signup_params
+      params.require(:user).permit(:username, :email, :password)
+    end
   end
 end
