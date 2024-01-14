@@ -1,30 +1,13 @@
 # README
+# Create database
+docker-compose up dynamodb dynamodb-admin
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+rake dynamoid:create_tables
 
-Things you may want to cover:
+# Run dev console
 
-* Ruby version
+rails c
 
-* System dependencies
+# Start server
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-```
-export AWS_SDK_CONFIG_OPT_OUT=1
-bin/setup_db
-```
-
+rails s
