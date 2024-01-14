@@ -3,8 +3,9 @@
 class Group
   include Dynamoid::Document
 
-  table name: :groups, key: :group_uuid, range_key: :participant_uuid, capacity_mode: :on_demand
+  table name: :groups, key: :group_uuid, capacity_mode: :on_demand
 
+  range :participant_uuid
   field :name, :string
   field :participant_uuid, :string
 
