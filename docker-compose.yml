@@ -3,6 +3,7 @@ version: '3.8'
 services:
   app:
     build: 
+      context: .
       dockerfile: Dockerfile.development
     ports:
       - "3000:3000"
@@ -11,8 +12,8 @@ services:
     volumes:
       - .:/rails
     environment:
-      - DYNAMO_ENDPOINT="http://dynamodb:8000"
-      - AWS_REGION="us-west-2"
+      - DYNAMO_ENDPOINT=http://dynamodb:8000
+      - AWS_REGION=us-west-2
       - AWS_ACCESS_KEY_ID=local
       - AWS_SECRET_ACCESS_KEY=local
   dynamodb:
