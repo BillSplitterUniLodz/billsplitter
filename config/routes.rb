@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :groups, param: :group_uuid do
     member do
+      resources :expenses, param: :expense_uuid
       post 'generate_invite'
     end
     collection do

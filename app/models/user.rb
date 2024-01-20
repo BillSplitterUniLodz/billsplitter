@@ -21,6 +21,7 @@ class User
 
   before_save :encrypt_password
 
+
   def jwt_subject
     user_uuid
   end
