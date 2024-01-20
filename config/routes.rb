@@ -9,9 +9,15 @@ Rails.application.routes.draw do
 
   post 'sign_up' => 'users/registration#sign_up'
   post 'signin' => 'users/sessions#signin'
-
-  resources :groups
-
   # Defines the root path route ("/")
   # root "posts#index"
+
+  resources :groups, param: :group_uuid do
+    member do
+      post 'generate_invite'
+    end
+    collection do
+      post 'process_invite'
+    end
+  end
 end
