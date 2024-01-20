@@ -26,14 +26,14 @@ class GroupsController < ApplicationController
   def generate_invite
     group_id = params[:group_uuid]
     token = TokenService.generate_token(group_id)
-    
+
     render json: { token: token }
   end
 
   def process_invite
     decoded_token = TokenService.decode_token(params[:token]).with_indifferent_access
     group = Group.top_level(decoded_token[:group_uuid])
-    new_group = group.invite(current_user.user_uuid)
+    group.invite(current_user.user_uuid)
 
     render json: Groups::Presenter.new(group.all_groups).serialize.to_json
   end
@@ -47,7 +47,7 @@ class GroupsController < ApplicationController
 
   def destroy
     groups = Group.top_level(params[:group_uuid]).all_groups
-    groups.each { |group| group.destroy }
+    groups.each(&:destroy)
 
     render json: { destroyed: true }
   end
