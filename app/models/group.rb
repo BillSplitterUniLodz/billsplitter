@@ -13,26 +13,25 @@ class Group
   global_secondary_index hash_key: :participant_uuid, range_key: :group_uuid
 
   def self.groups_by_participant(uuid)
-    where(participant_uuid: uuid).map do |g| 
+    where(participant_uuid: uuid).map do |g|
       where(group_uuid: g.group_uuid).to_a
     end.flatten
   end
 
   def all_groups
-    Group.where(group_uuid: self.group_uuid).to_a
+    Group.where(group_uuid:).to_a
   end
 
-
   def self.top_level(uuid)
-    where(group_uuid: uuid).to_a.detect{ |g| g.top_level }
+    where(group_uuid: uuid).to_a.detect(&:top_level)
   end
 
   def invite(participant_uuid)
     Group.create(
-      participant_uuid: participant_uuid, 
-      group_uuid: self.group_uuid,
-      top_level: false, 
-      name: self.name
+      participant_uuid:,
+      group_uuid:,
+      top_level: false,
+      name:
     )
   end
 
