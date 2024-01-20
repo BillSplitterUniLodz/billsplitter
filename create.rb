@@ -20,14 +20,14 @@ group = Group.create(
 )
 
 # Add user1 to group
-Group.create(
+group1 = Group.create(
   name: 'Lodz',
   top_level: false,
   group_uuid: group.group_uuid,
   participant_uuid: user1.user_uuid
 )
 
-Group.create(
+group_new = Group.create(
   name: 'Lodz',
   top_level: true,
   participant_uuid: user.user_uuid
