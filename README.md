@@ -1,6 +1,6 @@
 # README
 # Create database
-docker-compose up dynamodb dynamodb-admin
+docker-compose up --build dynamodb dynamodb-admin
 
 rake dynamoid:create_tables
 
