@@ -23,7 +23,7 @@ module Expenses
       users.each do |user|
         balance[user.user_uuid] = {}
         users.each do |debtor|
-          balance[user.user_uuid][debtor.user_uuid] = Money.from_cents(0)
+          balance[user.user_uuid][debtor.user_uuid] = 0
         end
       end
       balance

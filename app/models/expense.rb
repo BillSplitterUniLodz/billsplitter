@@ -24,10 +24,14 @@ class Expense
   end
 
   def deposit?
-    amount >= 0
+    amount.positive?
   end
 
   def credit?
-    amount < 0
+    amount.negative?
+  end
+
+  def to_h
+    attributes.merge(amount_display: Money.from_cents(amount).format)
   end
 end
