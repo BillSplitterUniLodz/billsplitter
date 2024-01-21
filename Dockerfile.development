@@ -1,8 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-ARG RUBY_VERSION=3.2.1
-FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim as base
+FROM ruby:3.2.1-alpine as base
 
 # Rails app lives here
 WORKDIR /rails
@@ -11,12 +10,16 @@ WORKDIR /rails
 ENV RAILS_ENV="development"
 RUN echo "Running in dev mode"
 
+RUN adduser -D rails
+
+RUN apk --update add \
+    build-base \
+    nodejs \
+    yarn \
+    tzdata
+
 # Throw-away build stage to reduce size of final image
 FROM base as build
-
-# Install packages needed to build gems
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y build-essential git pkg-config
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
@@ -27,18 +30,12 @@ COPY . .
 # Final stage for app image
 FROM base
 
-# Install packages needed for deployment
-RUN apt-get update -qq && \
-    apt-get install --no-install-recommends -y curl && \
-    rm -rf /var/lib/apt/lists /var/cache/apt/archives
-
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
 COPY --from=build /rails /rails
 
 # Run and own only the runtime files as a non-root user for security
-RUN useradd rails --create-home --shell /bin/bash && \
-    chown -R rails:rails log tmp
+RUN chown -R rails:rails /rails
 USER rails:rails
 
 # Entrypoint prepares the database.

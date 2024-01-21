@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/sh -e
 
 rake dynamoid:create_tables
 rake dynamoid:ping
