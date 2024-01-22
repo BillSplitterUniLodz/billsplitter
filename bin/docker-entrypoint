@@ -1,9 +1,14 @@
-#!/bin/bash -e
+#!/bin/sh
 
 # If running the rails server then create or migrate existing database
+echo "Running install dependencies. Please wait....."
+echo "It could take up to 5 min, you can get a coffee meanwhile :)"
+bundle install
+echo "Dependencies are now installed. Working on DB creation"
 if [ "${1}" == "./bin/rails" ] && [ "${2}" == "server" ]; then
   bin/rake dynamoid:create_tables
   bin/rake dynamoid:ping
 fi
+echo "DB created"
 
 exec "${@}"

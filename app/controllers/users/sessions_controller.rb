@@ -7,7 +7,7 @@ module Users
     def signin
       user = User.where(username: signin_params[:username]).first
       warden.set_user(user, scope: :user)
-      render json: user.to_h
+      render json: user.to_h.merge(jwt_token: generate_token(user, :user))
     end
 
     private
