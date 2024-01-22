@@ -1,19 +1,19 @@
 module Users
     class UsersController < ApplicationController
-        # before_action :authenticate_user!, only: [:show, :update]
-
         def show
-            render json: Users::Presenter.new(current_user).serialize.to_json
+            render json: current_user.to_json
         end
-
-
 
         def update
-            
+            current_user.update(user_params)
+
+            render json: current_user.to_json
         end
 
-        def group_params
-            params.require(:user).permit(:name)
+        private
+
+        def user_params
+            params.require(:current_user).permit(:username, :email)
         end
     end
 end
