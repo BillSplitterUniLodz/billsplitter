@@ -22,6 +22,10 @@ class Group
     Group.where(group_uuid: group_uuid).to_a
   end
 
+  def participant_uuids
+    Group.where(group_uuid: group_uuid).map(&:participant_uuid).flatten.uniq
+  end
+
   def self.top_level(uuid)
     where(group_uuid: uuid).to_a.detect(&:top_level)
   end
