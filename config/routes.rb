@@ -25,4 +25,8 @@ Rails.application.routes.draw do
       post 'process_invite'
     end
   end
+
+  namespace :users do
+    resources :users, only: %i[show update]
+  end
 end
