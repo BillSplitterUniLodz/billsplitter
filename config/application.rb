@@ -32,6 +32,9 @@ module Billsplitter
         resource '*', :headers => :any, :methods => [:get, :post, :put, :patch, :delete, :options]
       end
     end
+     config.hosts << "c4b1-31-183-143-30.ngrok-free.app"
+    config.hosts << "c4b1-31-183-143-30.ngrok-free.app"
+  
     config.load_defaults 7.1
 
     config.require_master_key = false
